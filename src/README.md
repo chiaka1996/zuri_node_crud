@@ -18,13 +18,13 @@ src
 <!-- API REFERENCE -->
 
 <!-- READ all data or GET all datas -->
-GET api: https://osujizuricrud.herokuapp.com/getuser 
+GET api: https://osujizuricrud.herokuapp.com/apis/getuser 
 
 parameter: none
 
 
 <!-- GET single user data froom the database -->
-GET api: https://osujizuricrud.herokuapp.com/singleuser
+GET api: https://osujizuricrud.herokuapp.com/apis/singleuser
 
 parameter: _id
 
@@ -50,7 +50,7 @@ on successfull get request : {
 
 
 <!-- create data or POST data -->
-POST api: https://osujizuricrud.herokuapp.com/adduser
+POST api: https://osujizuricrud.herokuapp.com/apis/adduser
 
 parameters: name, email, country
 
@@ -71,7 +71,7 @@ on successfull post request: {
 
  
 <!-- UPDATE DATA -->
-PUT api: https://osujizuricrud.herokuapp.com/updateuser
+PUT api: https://osujizuricrud.herokuapp.com/apis/updateuser
 
 parameters: id, name, email, country
 
@@ -98,7 +98,7 @@ on successfull update request: {
 
 
 <!-- DELETE DATA -->
-DELETE api:  https://osujizuricrud.herokuapp.com/updateuser
+DELETE api:  https://osujizuricrud.herokuapp.com/apis/deleteuser
 
 parameter: id
 
