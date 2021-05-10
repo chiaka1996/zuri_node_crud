@@ -29,7 +29,7 @@ connection.once('open', () => {
     console.log("mongoDb connected");
 });
 
-const api = require('./src/routes');
+const api = require('./routes');
 
 app.use("/apis", api);
 

@@ -5,69 +5,97 @@ exports.createUserData = (req, res) => {
     const {name, email, country} = req.body;
 
     if(!name || !email || !country) {
-        res.status(400).json({message: "please fill all fields"})
+        res.status(400).json({message: "please provide all fields"})
     }
 
     else {
         const saveUserData = new userModel ({
-            name,
-            email,
-            country
-        })
-    
-        saveUserData.save()
-        .then(() => res.status(200).json({message: "user added"}))
-        .catch((err) => res.status(500).json({Err: err}))
-    }    
-}
+                    name,
+                    email,
+                    country
+                })
 
-//get data from the database
+             saveUserData.save()
+             .then(() => {
+                 res.status(200).json({
+                     message: "user added successfully",
+                     data: {
+                         name,
+                         email,
+                         country
+                     }})
+                    }).catch((err) => res.status(500).json({Err: err}));
+    }
+}
+    
+//get all datas from the database
 exports.getUserData = (_, res) => { 
 
     userModel.find()
     .then((response) => {
+
         res.status(200).json(response);
-    })
-    .catch((err) => res.status(500).json({Err: err}));
+
+    }).catch((err) => res.status(500).json({Err: err}));
 }
+
+//get specific user data
+exports.getSingleUser = (req, res) => {
+
+    const {_id} =  req.body
+
+    userModel.find({_id})
+    .then((response) => {
+
+        res.status(200).json({  data: response })
+        
+    }).catch((err) => res.status(500).json({Err: err}));
+}
+
 
 //update the users data
 exports.updateUserData = (req, res) => {
-    const {id, name, email, country} = req.body;
+    const {_id, name, email, country} = req.body;
 
-    if(!id || !name || !email || !country) {
+    if(!_id || !name || !email || !country) {
         res.status(400).json({message: "please fil all fields"})
     }
 
     else{ 
 
         const updateUserData = new userModel({
-            _id: id,
+            _id,
             name,
             email,
             country
         })
     
-        userModel.updateOne({_id : id}, updateUserData)
+        userModel.updateOne({_id}, updateUserData)
         .then(() => {
-            res.status(200).json({message: "data updated successfullu"})
+            res.status(200).json({
+                message: "data updated successfullu",
+                data: {
+                    _id,
+                    name,
+                    email,
+                    country
+                }
+            })
         })
-        .catch((err) => {
-            res.status(500).json({Error: err});
-        });
+        .catch((err) => res.status(500).json({Error: err}));
     }
 }
 
 //delete a user data
 exports.deleteUserData = (req, res) => {
-    const {id} = req.body;
+    const {_id} = req.body;
 
-    if(!id) {
+    if(!_id) {
         res.status(400).json({message: "please provide id"})
     }
 
     else {
-        userModel.deleteOne({_id : id})
+        userModel.deleteOne({_id})
         .then(() => {
             res.status(200).json({message: "user deleted successfully"})
         })

@@ -10,5 +10,7 @@ router.put('/updateuser', addUserData.updateUserData);
 
 router.delete('/deleteuser', addUserData.deleteUserData);
 
+router.get('/singleuser', addUserData.getSingleUser);
+
 
 module.exports = router;
