@@ -12,5 +12,7 @@ router.delete('/deleteuser', addUserData.deleteUserData);
 
 router.get('/singleuser', addUserData.getSingleUser);
 
+router.get("/", addUserData.defaultLink);
+
 
 module.exports = router;

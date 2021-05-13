@@ -105,3 +105,7 @@ exports.deleteUserData = (req, res) => {
     }
 }
 
+exports.defaultLink = (_, res) => {
+    res.json("zuri crud application")
+}
+
