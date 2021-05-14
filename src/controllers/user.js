@@ -9,22 +9,33 @@ exports.createUserData = (req, res) => {
     }
 
     else {
-        const saveUserData = new userModel ({
-                    name,
-                    email,
-                    country
-                })
 
-             saveUserData.save()
-             .then(() => {
-                 res.status(200).json({
-                     message: "user added successfully",
-                     data: {
-                         name,
-                         email,
-                         country
-                     }})
-                    }).catch((err) => res.status(500).json({Err: err}));
+        userModel.findOne({email})
+        .then( (response) => {
+            if(response) {
+              return  res.status(400).json({message: "email already in use"})
+            }
+
+            const saveUserData = new userModel ({
+                name,
+                email,
+                country
+            })
+
+         saveUserData.save()
+         .then(() => {
+             res.status(200).json({
+                 message: "user added successfully",
+                 data: {
+                     name,
+                     email,
+                     country
+                 }})
+                }).catch((err) => res.status(500).json({Err: err}));
+
+
+        })
+       
     }
 }
     
