@@ -106,6 +106,6 @@ exports.deleteUserData = (req, res) => {
 }
 
 exports.defaultLink = (_, res) => {
-    res.json("zuri crud application")
+    res.status(404).json("404 error. unrecognised url")
 }
 
